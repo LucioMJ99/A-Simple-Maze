@@ -2,6 +2,13 @@ local gameState = "menu"
 
 local player = { x = 100, y = 100, size = 20 }
 local walls = {}
+local menuOptions = {}
+
+function love.conf(t)
+    t.window.width = 800
+    t.window.height = 600
+    t.window.title = "A Simple Maze"
+end
 
 function love.load()
     -- Definir las coordenadas de las paredes (forma de "M")
@@ -12,6 +19,11 @@ function love.load()
         { x = 150, y = 50, width = 80, height = 20 },
         { x = 150, y = 230, width = 20, height = 200 }
     }
+
+    -- Cargar imágenes para las opciones del menú
+    menuOptions[1] = love.graphics.newImage("Sprites/PlayButton.png")
+    menuOptions[2] = love.graphics.newImage("Sprites/RulesButton.png")
+    menuOptions[3] = love.graphics.newImage("Sprites/ExitButton.png")
 end
 
 function love.update(dt)
@@ -46,9 +58,11 @@ function love.draw()
     if gameState == "menu" then
         -- Dibujar el menú principal
         love.graphics.print("Menu Principal", 200, 100)
-        love.graphics.print("1. Jugar", 200, 150)
-        love.graphics.print("2. Ver Cómo Jugar", 200, 170)
-        love.graphics.print("3. Salir", 200, 190)
+        
+        -- Dibujar las imágenes de las opciones del menú
+        love.graphics.draw(menuOptions[1], 200, 150)
+        love.graphics.draw(menuOptions[2], 200, 250)
+        love.graphics.draw(menuOptions[3], 200, 350)
     elseif gameState == "game" then
         -- Dibujar el juego solo cuando estamos en el estado "game"
         love.graphics.setColor(255, 255, 255)
