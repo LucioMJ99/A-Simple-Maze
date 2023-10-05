@@ -68,7 +68,7 @@ end
 function love.draw()
     if gameState == "menu" then
         -- Dibujar el menú principal
-        love.graphics.print("Menu Principal", 200, 100)
+        love.graphics.print("A SIMPLE MAZE", 200, 100)
 
         -- Dibujar las imágenes de las opciones del menú
         for _, option in ipairs(menuOptions) do
