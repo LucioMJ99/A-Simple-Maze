@@ -154,7 +154,7 @@ function checkCollision(a, b)
 end
 
 function winCondition(player)
-    if player.x >= 766 and player.y <= 30 then
+    if player.x >= 766 and player.y <= 60 then
         return true
     end
     return false  -- No se cumple la condición de victoria
