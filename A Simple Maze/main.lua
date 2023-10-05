@@ -88,7 +88,7 @@ function love.draw()
         love.graphics.draw(laberinto, 0, 0)
 
         -- Dibujar al jugador (cuadrado)
-        love.graphics.setColor(0, 255, 0)
+        love.graphics.setColor(0, 0, 255)
         love.graphics.rectangle("fill", player.x, player.y, player.size, player.size)
 
         -- Restablecer el color al valor original
