@@ -2,14 +2,15 @@ local gameState = "menu"
 
 local laberinto
 local menuOptions = {}
-local player = { x = 100, y = 100, size = 8, speed = 100 }
+local player = { x = 50, y = 50, size = 6, speed = 100 }
 
 -- Definir áreas de colisión para los obstáculos
 local colisionables = {
-    { x = 0, y = 0, width = 32, height = 600 },  -- Barras Blancas
+    { x = 0, y = 0, width = 32, height = 600 },  -- Barras Blancas lado IZQ
+    { x = 768, y = 0, width = 32, height = 600 },  -- Barras Blancas lado DER
     { x = 0, y = 0, width = 33, height = 33 },    -- Cuadrados
     { x = 0, y = 0, width = 96, height = 33 },    -- Rectángulos obstáculos
-    { x = 0, y = 0, width = 32, height = 224 },   -- Separador de la M
+    { x = 377, y = 300, width = 32, height = 270 },   -- Separador de la M
     { x = 0, y = 593, width = 736, height = 7 }   -- Linea semi circular de abajo de todo
 }
 
@@ -98,7 +99,7 @@ function love.mousepressed(x, y, button, istouch, presses)
                 if option == menuOptions[1] then
                     gameState = "game"
                 elseif option == menuOptions[2] then
-                    print("Cómo jugar: Usa las teclas W, A, S y D para mover el cuadrado. Evita las paredes.")
+                    print("Como jugar: Usa las teclas W, A, S y D para mover el cuadrado. Evita las paredes.")
                 elseif option == menuOptions[3] then
                     love.event.quit()
                 end
