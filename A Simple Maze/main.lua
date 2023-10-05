@@ -3,6 +3,8 @@ local gameState = "menu"
 local laberinto
 local menuOptions = {}
 local player = { x = 50, y = 50, size = 6, speed = 100 }
+local rulesMessage = ""
+local rulesVisible = false  -- Variable para rastrear la visibilidad de las reglas
 
 -- Definir áreas de colisión para los obstáculos
 local colisionables = {
@@ -67,13 +69,26 @@ function love.update(dt)
             gameState = "Win"
         end
 
+        -- Restablecer el mensaje de reglas y su visibilidad al volver al juego
+        rulesMessage = ""
+        rulesVisible = false
+
+    elseif gameState == "Win" then
+        -- Dibujar el mensaje de victoria en la pantalla
+        love.graphics.print("¡Congratulation you won!", 200, 200)
+        love.graphics.print("Press any key to return to menu.", 200, 220)
+        
+        -- Manejar el regreso al menú cuando se presiona cualquier tecla después de ganar
+        if love.keyboard.isDown("space") then
+            gameState = "menu"
+        end
     end
 end
 
 function love.draw()
     if gameState == "menu" then
         -- Dibujar el menú principal
-        love.graphics.print("A SIMPLE MAZE", 200, 100)
+        love.graphics.print("A SIMPLE MAZE by Lucio Molina Jalabert && Juan Pablo Pivetta", 200, 100)
 
         -- Dibujar las imágenes de las opciones del menú
         for _, option in ipairs(menuOptions) do
@@ -93,6 +108,15 @@ function love.draw()
 
         -- Restablecer el color al valor original
         love.graphics.setColor(r, g, b, a)
+    elseif gameState == "Win" then
+        -- Dibujar el mensaje de victoria en la pantalla
+        love.graphics.print("¡Congratulation you won!", 200, 200)
+        love.graphics.print("Press any key to return to menu.", 200, 220)
+    end
+
+    -- Dibujar el mensaje de reglas en la pantalla solo si son visibles
+    if rulesVisible then
+        love.graphics.print(rulesMessage, 200, 400)
     end
 end
 
@@ -104,12 +128,20 @@ function love.mousepressed(x, y, button, istouch, presses)
                 if option == menuOptions[1] then
                     gameState = "game"
                 elseif option == menuOptions[2] then
-                    print("Como jugar: Usa las teclas W, A, S y D para mover el cuadrado. Evita las paredes.")
+                    -- Cambiar el mensaje de reglas y hacer que sean visibles
+                    rulesMessage = "How To Play: Use the W, A, S and D keys to move the square. Avoid the walls."
+                    rulesVisible = true
                 elseif option == menuOptions[3] then
                     love.event.quit()
                 end
             end
         end
+    elseif gameState == "Win" then
+        -- Volver al menú cuando se presiona cualquier tecla después de ganar
+        gameState = "menu"
+        -- Limpiar el mensaje de reglas y hacer que sean invisibles
+        rulesMessage = ""
+        rulesVisible = false
     end
 end
 
