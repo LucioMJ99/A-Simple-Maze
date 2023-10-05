@@ -62,6 +62,11 @@ function love.update(dt)
                 player.y = 100
             end
         end
+
+        if winCondition(player)
+            gameState = "Win"
+        end
+
     end
 end
 
@@ -114,4 +119,10 @@ function checkCollision(a, b)
            a.x + a.size > b.x and
            a.y < b.y + b.height and
            a.y + a.size > b.y
+end
+
+function winCondition(player)
+    if player.x >= 766 && player.y <= 30
+        return true
+    end
 end
