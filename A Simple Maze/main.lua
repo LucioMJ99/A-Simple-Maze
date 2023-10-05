@@ -63,7 +63,7 @@ function love.update(dt)
             end
         end
 
-        if winCondition(player)
+        if winCondition(player) then
             gameState = "Win"
         end
 
@@ -122,7 +122,8 @@ function checkCollision(a, b)
 end
 
 function winCondition(player)
-    if player.x >= 766 && player.y <= 30
+    if player.x >= 766 and player.y <= 30 then
         return true
     end
+    return false  -- No se cumple la condición de victoria
 end
